@@ -27,8 +27,8 @@ let
     cat $out/drivers/usb/host/xhci-ext-caps.c
   '';
 
-  pkg = { stdenv, gnumake, hostPlatform, fetchurl, fetchFromGitHub, perl, buildLinux, libelf, utillinux, ... } @ args:
-    import <nixpkgs/pkgs/os-specific/linux/kernel/generic.nix> (args // rec {
+  pkg = { stdenv, buildPackages, gnumake, hostPlatform, fetchurl, fetchFromGitHub, perl, buildLinux, libelf, utillinux, ... } @ args:
+    buildLinux (args // rec {
       inherit version;
       kernelPatches = [
         pkgs.kernelPatches.bridge_stp_helper
